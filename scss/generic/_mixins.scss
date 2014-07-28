@@ -1,0 +1,157 @@
+
+
+// -- radius --
+@mixin radius($radius) {
+
+  border-radius: $radius; 
+  -webkit-border-radius: $radius; 
+  -moz-border-radius: $radius;
+
+}
+
+// -- box shadow --
+@mixin box-shadow($shadow) {
+
+  box-shadow: $shadow; 
+  -webkit-box-shadow: $shadow; 
+  -moz-box-shadow: $shadow;
+
+}
+
+@mixin text-shadow($shadow) {
+
+  text-shadow: $shadow; 
+  -webkit-text-shadow: $shadow; 
+  -moz-text-shadow: $shadow;
+
+}
+
+// -- opacity --
+@mixin opacity($opacity) {
+
+  opacity: $opacity;
+  filter: unquote("alpha(opacity=#{round($opacity * 100)})");
+  -moz-opacity: $opacity; 
+  -khtml-opacity: $opacity;
+
+}
+
+// -- transition --
+@mixin transition {
+
+  transition: all 0.5s ease; 
+  -moz-transition: all 0.5s ease; 
+  -webkit-transition: all 0.5s ease; 
+  -o-transition: all 0.5s ease; 
+  -ms-transition: all 0.5s ease;
+
+}
+
+// -- transform --
+@mixin transform($transform) {
+
+  transform: $transform; 
+  -moz-transform: $transform; 
+  -webkit-transform: $transform; 
+  -o-transform: $transform; 
+  -ms-transform: $transform;
+
+}
+
+// -- animation --
+@mixin animation($name, $duration: 1000ms, $iterations: infinite, $timing-function: ease, $delay: 0ms) {
+
+  -webkit-animation: $name $duration $iterations $timing-function $delay;
+  -moz-animation: $name $duration $iterations $timing-function $delay;
+  -o-animation: $name $duration $iterations $timing-function $delay;
+  animation: $name $duration $iterations $timing-function $delay;
+
+}
+  
+
+// -- gradient --
+@mixin gradient($top-color, $bottom-color) {
+
+  background: $bottom-color;
+    background: -moz-linear-gradient(top, $top-color, $bottom-color 100%);
+    background: -webkit-gradient(linear, lefttop, leftbottom, color-stop(0%,$top-color), color-stop(100%,$bottom-color));
+    background: -webkit-linear-gradient(top, $top-color 0%,$bottom-color 100%);
+    background: -o-linear-gradient(top, $top-color 0%,$bottom-color 100%);
+    background: -ms-linear-gradient(top, $top-color 0%,$bottom-color 100%);
+    background: linear-gradient(to bottom, $top-color 0%,$bottom-color 100%); 
+      filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#{ie-hex-str($top-color)}', endColorstr='#{ie-hex-str($bottom-color)}',GradientType=0 );
+
+}
+
+// -- box-sizing --
+@mixin box-sizing {
+
+  box-sizing: border-box; 
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+
+}
+
+// -- triangolo --
+@mixin triangle2($direction, $size, $color) {
+
+  content: '';
+  display: block;
+  position: absolute;
+  height: 0; width: 0;
+
+  @if ($direction == 'up'){
+
+    border-bottom: $size solid $color;
+    border-left: 1/2*$size solid transparent;
+    border-right: 1/2*$size solid transparent;
+
+  }
+  @else if ($direction == 'down'){
+
+    border-top: $size solid $color;
+    border-left: 1/2*$size solid transparent;
+    border-right: 1/2*$size solid transparent;
+
+  }
+  @else if ($direction == 'left'){
+
+    border-top: 1/2*$size solid transparent;
+    border-bottom: 1/2*$size solid transparent;
+    border-right: $size solid $color;
+
+  }
+  @else if ($direction == 'right'){
+
+    border-top: 1/2*$size solid transparent;
+    border-bottom: 1/2*$size solid transparent;
+    border-left: $size solid $color;
+
+  }
+
+}
+
+// -- testo troncato --
+@mixin abstract { 
+
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+
+}
+
+// -- text rendering --
+@mixin text-render { 
+
+  text-rendering: optimizeLegibility; 
+
+}
+
+// -- text rendering --
+@mixin reset-list {
+
+  margin: 0; padding: 0;
+  list-style: none; list-style-image: none;
+  font-size: 1em;
+
+}

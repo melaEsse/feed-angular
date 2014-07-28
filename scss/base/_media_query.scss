@@ -1,0 +1,32 @@
+// breakpoint
+$break-small: 20em;
+$break-large: 64em;
+$break-medium: 37.5em;
+$break-landscape: landscape;
+$break-portrait: portrait;
+
+@mixin respond-to($media) {
+  @if $media == phone {
+    @media only screen and (max-width: $break-small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-medium) and (max-width: $break-large - 1) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $break-largel) { @content; }
+  }
+  @else if $media == iPad-landscape {
+    @media only screen and (min-width: $break-medium) and (max-width: $break-large) and (orientation: $break-landscape)  { @content; }
+  }
+  @else if $media == iPad-portrait {
+    @media only screen and (min-width: $break-medium) and (max-width: $break-large) and (orientation: $break-portrait)  { @content; }
+  }
+
+  @else if $media == small-portrait {
+    @media only screen and (min-width: $break-small) and (orientation: $break-portrait)  { @content; }
+  }
+
+  @else if $media == retina {
+    @media only screen and (min-width: $break-small) and (orientation: $break-portrait)  { @content; }
+  }
+}

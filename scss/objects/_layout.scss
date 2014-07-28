@@ -1,0 +1,17 @@
+.zz--container {
+
+	@if $tipo-griglia == fluid {
+
+ 		width: $container;
+
+	 }
+
+	 @if $tipo-griglia ==  pixel {
+
+ 		width: $container - $gutter;
+
+	 }
+
+	margin: 0 auto;
+
+}

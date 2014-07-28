@@ -1,0 +1,172 @@
+// Griglia fluida
+@if $tipo-griglia == fluid {
+
+	// determina la width di una singola colonna
+ 	$col-width: (100% / $cols);
+
+
+	// crea la griglia
+	@for $i from 1 through $cols {
+
+	    .col#{$i} {
+	        width: $col-width * $i;
+	        float: left;
+	        padding-left: ($gutter/2);
+	        padding-right: ($gutter/2);
+	    }
+	}
+
+	//pre- margin-left
+	@for $i from 1 through ($cols - 1) {
+	    .pre#{$i} {
+	        margin-left: ($col-width * $i);
+	    }
+	}
+
+	//suf - margin-right
+	@for $i from 1 through ($cols - 1) {
+	    .suf#{$i} {
+	        margin-right: ($col-width * $i);
+	    }
+	}
+
+}
+
+// Griglia in pixel
+@if $tipo-griglia == pixel { 
+	
+
+	// determina la width di una singola colonna
+ 	$col-width: ($container / $cols);
+
+
+	// crea la griglia
+	@for $i from 1 through $cols {
+
+	    .col#{$i} {
+	        width: $col-width * $i;
+	        float: left;
+	        padding-left: ($gutter/2);
+	        padding-right: ($gutter/2);
+	    }
+	}
+
+	//pre- margin-left
+	@for $i from 1 through ($cols - 1) {
+	    .pre#{$i} {
+	        margin-left: ($col-width * $i);
+	    }
+	}
+
+	//suf - margin-right
+	@for $i from 1 through ($cols - 1) {
+	    .suf#{$i} {
+	        margin-right: ($col-width * $i);
+	    }
+	}
+
+}
+
+//box-sizing
+@for $i from 1 through $cols {
+	
+	//box-sizing
+	.col#{$i} { @include box-sizing; }
+	
+	//ie7 box-sizing
+	@include ie7-class {
+	    .col#{$i} {
+	        width: expression((this.parentNode.clientWidth/#{$cols/$i} - parseInt(this.currentStyle['paddingLeft']) - parseInt(this.currentStyle['paddingRight'])) + 'px'); 
+	    }
+    }
+}
+
+
+
+//row
+.row {
+	
+	margin-left: -($gutter/2);
+	margin-right: -($gutter/2); 
+
+	&:after {
+		clear: both;
+		content: ".";
+		display: block;
+		height: 0;
+		visibility: hidden;
+	}
+}
+
+
+
+//respond table
+@include respond-to(medium-screens) {
+
+	%width-full-tablet { width: 100%; }
+	%width-half-tablet { width: 50%; }
+	%margin-none-tablet { margin: 0; }
+	
+	//tutte le collonne al 100%
+	@for $i from $cols through 7 {
+
+		.col#{$i} { @extend %width-full-tablet; }
+	}
+
+	@for $i from 6 through 3 {
+
+		.col#{$i} { @extend %width-half-tablet; }
+	}
+
+	@for $i from 2 through 1 {
+
+		.col#{$i} { width: 33.33%; }
+	}
+
+	//settaggio colonne
+	.tablet-full { width: 100%; }
+	.tablet-1of3 { width: 33.33333%; }
+	.tablet-2of3 { width: 66.6666%; }
+	.tablet-1of2 { width: 50%; }
+
+}
+
+//respond phone
+@include respond-to(phone) {
+
+	%width-full { width: 100%; }
+	%width-half { width: 50%; }
+	%margin-none { margin: 0; }
+
+	
+	//tutte le collonne al 100%
+	@for $i from 1 through $cols {
+
+		.col#{$i} { @extend %width-full; }
+	}
+
+	//pre - margin-left annullato
+	@for $i from 1 through ($cols - 1) {
+	    .pre#{$i} { @extend %margin-none; }
+	}
+
+	//suf - margin-right annullato
+	@for $i from 1 through ($cols - 1) {
+	    .suf#{$i} { @extend %margin-none; }
+	}
+
+	//settaggio colonne
+	.phone-full { width: 100%; }
+	.phone-1of3 { width: 33.33333%;	}
+	.phone-1of2 { width: 50%; }
+
+}
+
+//ie7
+@include ie7-class {
+	.row {*zoom: expression( this.runtimeStyle.zoom="1", this.appendChild( document.createElement("span")).className="ie-after" );}
+	.row .ie-after {*zoom: expression(this.runtimeStyle['zoom'] = 'span', this.innerHTML = '&nbsp;');}
+}
+
+
+

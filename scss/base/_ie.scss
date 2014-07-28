@@ -1,0 +1,6 @@
+
+
+//content
+@mixin ie7-class {
+  .lt-ie8 {	@content; }
+}
