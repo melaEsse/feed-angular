@@ -13,7 +13,7 @@ app.controller('feedCtrl', function($scope, $http) {
 
 			data.feed.entry.forEach(function(item) {
 
-	      	$scope.items = data.responseData.feed.entries;
+	      	$scope.items = item;
 
 	      });
 
